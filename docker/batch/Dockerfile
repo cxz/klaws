@@ -99,23 +99,23 @@ RUN apt-get install -y libfreetype6-dev && \
     # chainer
     pip install chainer && \
     # NLTK Project datasets
-    mkdir -p /usr/share/nltk_data && \
+    #mkdir -p /usr/share/nltk_data && \
     # NLTK Downloader no longer continues smoothly after an error, so we explicitly list
     # the corpuses that work
-    python -m nltk.downloader -d /usr/share/nltk_data abc alpino \
-    averaged_perceptron_tagger basque_grammars biocreative_ppi bllip_wsj_no_aux \
-book_grammars brown brown_tei cess_cat cess_esp chat80 city_database cmudict \
-comparative_sentences comtrans conll2000 conll2002 conll2007 crubadan dependency_treebank \
-europarl_raw floresta framenet_v15 gazetteers genesis gutenberg hmm_treebank_pos_tagger \
-ieer inaugural indian jeita kimmo knbc large_grammars lin_thesaurus mac_morpho machado \
-masc_tagged maxent_ne_chunker maxent_treebank_pos_tagger moses_sample movie_reviews \
-mte_teip5 names nps_chat omw opinion_lexicon paradigms \
-pil pl196x ppattach problem_reports product_reviews_1 product_reviews_2 propbank \
-pros_cons ptb punkt qc reuters rslp rte sample_grammars semcor sentence_polarity \
-sentiwordnet shakespeare sinica_treebank smultron snowball_data spanish_grammars \
-state_union stopwords subjectivity swadesh switchboard tagsets timit toolbox treebank \
-twitter_samples udhr2 udhr unicode_samples universal_tagset universal_treebanks_v20 \
-vader_lexicon verbnet webtext word2vec_sample wordnet wordnet_ic words ycoe && \
+    #python -m nltk.downloader -d /usr/share/nltk_data abc alpino \
+    #averaged_perceptron_tagger basque_grammars biocreative_ppi bllip_wsj_no_aux \
+#book_grammars brown brown_tei cess_cat cess_esp chat80 city_database cmudict \
+#comparative_sentences comtrans conll2000 conll2002 conll2007 crubadan dependency_treebank \
+#europarl_raw floresta framenet_v15 gazetteers genesis gutenberg hmm_treebank_pos_tagger \
+#ieer inaugural indian jeita kimmo knbc large_grammars lin_thesaurus mac_morpho machado \
+#masc_tagged maxent_ne_chunker maxent_treebank_pos_tagger moses_sample movie_reviews \
+#mte_teip5 names nps_chat omw opinion_lexicon paradigms \
+#pil pl196x ppattach problem_reports product_reviews_1 product_reviews_2 propbank \
+#pros_cons ptb punkt qc reuters rslp rte sample_grammars semcor sentence_polarity \
+#sentiwordnet shakespeare sinica_treebank smultron snowball_data spanish_grammars \
+#state_union stopwords subjectivity swadesh switchboard tagsets timit toolbox treebank \
+#twitter_samples udhr2 udhr unicode_samples universal_tagset universal_treebanks_v20 \
+#vader_lexicon verbnet webtext word2vec_sample wordnet wordnet_ic words ycoe && \
     # Stop-words
     pip install stop-words && \
     # clean up
@@ -131,12 +131,12 @@ RUN apt-get update && \
     ln -s /usr/lib/x86_64-linux-gnu/libgomp.so.1 /opt/conda/lib/libgomp.so.1 && \
     ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/conda/lib/libstdc++.so.6 && \
     # Libgeos, for mapping libraries
-    apt-get -y install libgeos-dev && \
+    #apt-get -y install libgeos-dev && \
     # pyshp and pyproj are now external dependencies of Basemap
-    pip install pyshp pyproj && \
-    cd /usr/local/src && git clone https://github.com/matplotlib/basemap.git && \
-    export GEOS_DIR=/usr/local && \
-    cd basemap && python setup.py install && \
+    #pip install pyshp pyproj && \
+    #cd /usr/local/src && git clone https://github.com/matplotlib/basemap.git && \
+    #export GEOS_DIR=/usr/local && \
+    #cd basemap && python setup.py install && \
     # Pillow (PIL)
     apt-get -y install zlib1g-dev liblcms2-dev libwebp-dev && \
     pip install Pillow && \
@@ -148,12 +148,12 @@ RUN apt-get update && \
     apt-get install -y libpq-dev && \
     pip install ibis-framework && \
     # Cartopy plus dependencies
-    yes | conda install proj4 && \
-    pip install packaging && \
-    cd /usr/local/src && git clone https://github.com/Toblerity/Shapely.git && \
-    cd Shapely && python setup.py install && \
-    cd /usr/local/src && git clone https://github.com/SciTools/cartopy.git && \
-    cd cartopy && python setup.py install && \
+    #yes | conda install proj4 && \
+    #pip install packaging && \
+    #cd /usr/local/src && git clone https://github.com/Toblerity/Shapely.git && \
+    #cd Shapely && python setup.py install && \
+    #cd /usr/local/src && git clone https://github.com/SciTools/cartopy.git && \
+    #cd cartopy && python setup.py install && \
     # MXNet
     cd /usr/local/src && git clone --recursive https://github.com/dmlc/mxnet && \
     cd /usr/local/src/mxnet && cp make/config.mk . && \
@@ -171,17 +171,17 @@ RUN apt-get update && \
     mkdir -p /etc/ipython/ && echo "c = get_config(); c.IPKernelApp.matplotlib = 'inline'" > /etc/ipython/ipython_config.py && \
     # h2o
     # This requires python-software-properties and Java.
-    apt-get install -y python-software-properties zip && \
-    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list &&     echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list &&     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 C857C906 2B90D010 && \
-    apt-get update && \
-    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
-    apt-get install -y oracle-java8-installer && \
-    cd /usr/local/src && mkdir h2o && cd h2o && \
-    wget http://h2o-release.s3.amazonaws.com/h2o/latest_stable -O latest && \
-    wget --no-check-certificate -i latest -O h2o.zip && rm latest && \
-    unzip h2o.zip && rm h2o.zip && cp h2o-*/h2o.jar . && \
-    pip install `find . -name "*whl"` && \
+    #apt-get install -y python-software-properties zip && \
+    #echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list &&     echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list &&     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 C857C906 2B90D010 && \
+    #apt-get update && \
+    #echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    #echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
+    #apt-get install -y oracle-java8-installer && \
+    #cd /usr/local/src && mkdir h2o && cd h2o && \
+    #wget http://h2o-release.s3.amazonaws.com/h2o/latest_stable -O latest && \
+    #wget --no-check-certificate -i latest -O h2o.zip && rm latest && \
+    #unzip h2o.zip && rm h2o.zip && cp h2o-*/h2o.jar . && \
+    #pip install `find . -name "*whl"` && \
     # Keras setup
     # Keras likes to add a config file in a custom directory when it's
     # first imported. This doesn't work with our read-only filesystem, so we
@@ -200,7 +200,7 @@ RUN apt-get update && \
     # HDF5 support
     conda install h5py && \
     # https://github.com/biopython/biopython
-    pip install biopython && \
+    #pip install biopython && \
     # Regularized Greedy Forests
     cd /usr/local/src && wget https://github.com/fukatani/rgf_python/releases/download/0.2.0/rgf1.2.zip && \
     unzip rgf1.2.zip && cd rgf1.2 && make && mv bin/rgf /usr/local/bin && \
