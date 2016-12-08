@@ -2,3 +2,4 @@ node
 sphinx
 click
 boto3
+moto
