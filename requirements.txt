@@ -1,0 +1,4 @@
+node
+sphinx
+click
+boto3
