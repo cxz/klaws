@@ -5,6 +5,8 @@
 import unittest
 from moto import mock_ecs
 from pprint import pprint
+import os
+
 import klaws.task as task
 import klaws.cluster as cluster
 
@@ -40,10 +42,5 @@ class TaskTestSuite(unittest.TestCase):
         
         
 if __name__ == '__main__':    
-    #httpretty doesnt work with proxy 
-    #del os.environ['HTTP_PROXY'] 
-    #del os.environ['http_proxy']
-    #del os.environ['https_proxy']
-    #del os.environ['HTTP_PROXY']    
     unittest.main()
     

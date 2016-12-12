@@ -25,10 +25,5 @@ class ClusterTestSuite(unittest.TestCase):
                 
             
 if __name__ == '__main__':    
-    #httpretty doesnt work with proxy 
-    #del os.environ['HTTP_PROXY'] 
-    #del os.environ['http_proxy']
-    #del os.environ['https_proxy']
-    #del os.environ['HTTP_PROXY']    
     unittest.main()
     

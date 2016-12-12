@@ -1,10 +1,22 @@
 import click
+import klaws.s3
 
-
-@click.command()
-@click.option('--as-cowboy', '-c', is_flag=True, help='Greet as a cowboy.')
-@click.argument('name', default='world', required=False)
-def main(name, as_cowboy):
+@click.group()
+@click.option('--debug/--no-debug', default=False)
+@click.pass_context
+def main(ctx, debug):    
     """ Having fun with AWS and Kaggle """
-    greet = 'Howdy' if as_cowboy else 'Hello'
-    click.echo('{0}, {1}.'.format(greet, name))
+    #ctx.obj['DEBUG'] = debug
+    #greet = 'Howdy' if as_cowboy else 'Hello'
+    #click.echo('{0}, {1}.'.format(greet, name))
+
+    
+@main.command()
+@click.pass_context
+def check_s3(ctx):
+    click.echo('checking S3')
+    print(klaws.s3.buckets())
+    #click.echo('Debug is %s' % (ctx.obj['DEBUG'] and 'on' or 'off'))
+    
+if __name__ == '__main__':
+    main(obj={})    
